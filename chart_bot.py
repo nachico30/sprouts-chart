@@ -17,8 +17,8 @@ def get_market_price_unnamed_exchange(target, base, time):
         target, base, str(time - 300) + "000")
     response_target = requests.get(unnamed_api_url).json()[0]
 
-    for_insert = (f"{response_target['openTime']}"[:-3],
-                  f"{response_target['closeTime']}"[:-3],
+    for_insert = (f"{response_target['openTime']}",
+                  f"{response_target['closeTime']}",
                   f"{response_target['open']:.8f}",
                   f"{response_target['high']:.8f}",
                   f"{response_target['low']:.8f}",
@@ -77,9 +77,6 @@ def get_market_price_doge2usd(open, high, low, close, btc):
 
 
 if __name__ == '__main__':
-    print('start')
     now = datetime.now()
     insert_value = get_market_price_unnamed_exchange(TARGET, BASE, int(now.timestamp()))
-    print(insert_value)
     chart_db.chart_db_insert(DBFILE, insert_value)
-    print('end')
