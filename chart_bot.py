@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 from datetime import datetime
+from time import sleep
 import requests
 import os
 import chart_db
@@ -77,6 +78,12 @@ def get_market_price_doge2usd(open, high, low, close, btc):
 
 
 if __name__ == '__main__':
-    now = datetime.now()
-    insert_value = get_market_price_unnamed_exchange(TARGET, BASE, int(now.timestamp()))
-    chart_db.chart_db_insert(DBFILE, insert_value)
+    for i in range(1, 3):
+        try:
+            now = datetime.now()
+            insert_value = get_market_price_unnamed_exchange(TARGET, BASE, int(now.timestamp()))
+            chart_db.chart_db_insert(DBFILE, insert_value)
+        except Exception:
+            sleep(60)
+        else:
+            return True

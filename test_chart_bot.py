@@ -1,7 +1,8 @@
 from datetime import datetime
 import os
+import zlib
+import json
 import chart_db
-
 
 DBFILE = "chart.db3"
 
@@ -71,5 +72,9 @@ def get_market_price_doge2usd(open, high, low, close, btc):
 
 
 if __name__ == '__main__':
+    path_w = './chart_data.zlib.txt'
     d = chart_db.chart_db_select(DBFILE)
-    print(d)
+    s = json.dumps(d)
+    z = zlib.compress(s.encode("utf-8"))
+    with open(path_w, mode='w') as f:
+        f.write(z.hex())
