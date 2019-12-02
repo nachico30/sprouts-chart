@@ -86,4 +86,4 @@ if __name__ == '__main__':
         except Exception:
             sleep(60)
         else:
-            return True
+            break
