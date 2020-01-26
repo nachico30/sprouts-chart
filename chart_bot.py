@@ -78,9 +78,9 @@ def get_market_price_doge2usd(open, high, low, close, btc):
 
 
 if __name__ == '__main__':
+    now = datetime.now() - datetime.timedelta(seconds=30)
     for i in range(1, 3):
         try:
-            now = datetime.now()
             insert_value = get_market_price_unnamed_exchange(TARGET, BASE, int(now.timestamp()))
             chart_db.chart_db_insert(DBFILE, insert_value)
         except Exception:
