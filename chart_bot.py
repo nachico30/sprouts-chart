@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-from datetime import datetime
+from datetime import datetime, timedelta
 from time import sleep
 import requests
 import os
@@ -78,7 +78,7 @@ def get_market_price_doge2usd(open, high, low, close, btc):
 
 
 if __name__ == '__main__':
-    now = datetime.now() - datetime.timedelta(seconds=30)
+    now = datetime.now() - timedelta(seconds=30)
     for i in range(1, 3):
         try:
             insert_value = get_market_price_unnamed_exchange(TARGET, BASE, int(now.timestamp()))
